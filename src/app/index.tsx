@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import logo from "../assets/logo.png";
 import Routes from "./routes";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 import { FiPrinter, FiMapPin } from "react-icons/fi";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 const App: React.FC = () => {
@@ -27,16 +27,22 @@ const App: React.FC = () => {
         <Container maxWidth="container.xl" paddingX={0}>
           <Stack spacing={2}>
             <Stack
-              direction={{ base: "column", md: "row" }}
+              direction="row"
               justifyContent="space-between"
+              spacing={5}
+              alignItems="center"
             >
               <Stack
-                direction={{ base: "column", md: "row" }}
-                spacing={12}
+                direction="row"
+                spacing={{ base: 7, md: 12 }}
                 flex={1}
                 alignItems={{ base: "center", md: "initial" }}
               >
-                <Image width="fit-content" objectFit="contain" src={logo} />
+                <Image
+                  width={{ base: "30%", md: "fit-content" }}
+                  objectFit="contain"
+                  src={logo}
+                />
                 <Stack
                   backgroundColor="white"
                   padding={2}
@@ -56,6 +62,7 @@ const App: React.FC = () => {
                     _placeholder={{
                       color: "gray.300",
                     }}
+                    margin={0}
                   />
                   <Icon
                     as={AiOutlineSearch}
@@ -73,6 +80,7 @@ const App: React.FC = () => {
                 spacing={3}
                 width="fit-content"
                 alignSelf={{ base: "center", md: "initial" }}
+                display={{ base: "none", md: "flex" }}
               >
                 <Icon
                   width={5}
@@ -82,6 +90,20 @@ const App: React.FC = () => {
                 />
                 <Text>Compra tu Point Mini + QR a $249</Text>
               </Stack>
+              <Stack direction="row" display={{ base: "flex", md: "none" }}>
+                <Icon
+                  display="flex"
+                  as={AiOutlineMenu}
+                  fontWeight="100"
+                  fontSize={25}
+                />
+                <Icon
+                  display="flex"
+                  as={HiOutlineShoppingCart}
+                  fontWeight="100"
+                  fontSize={25}
+                />
+              </Stack>
             </Stack>
             <Stack
               direction="row"
@@ -89,7 +111,12 @@ const App: React.FC = () => {
               alignItems="baseline"
             >
               <Stack direction="row" spacing={16} alignItems="baseline">
-                <Stack direction="row" alignItems="center" spacing={1}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  spacing={1}
+                  display={{ base: "none", md: "flex" }}
+                >
                   <Icon
                     width={5}
                     height={5}
@@ -115,6 +142,7 @@ const App: React.FC = () => {
                   fontSize="sm"
                   color="blackAlpha.600"
                   spacing={5}
+                  display={{ base: "none", md: "flex" }}
                 >
                   <Text>Categorías</Text>
                   <Text>Ofertas</Text>
@@ -130,11 +158,13 @@ const App: React.FC = () => {
                 alignItems="center"
                 spacing={6}
                 fontSize="sm"
+                display={{ base: "none", md: "flex" }}
               >
                 <Text>Creá tu Cuenta</Text>
                 <Text>Ingresá</Text>
                 <Text>Mis compras</Text>
                 <Icon
+                  display="flex"
                   fontSize={20}
                   as={HiOutlineShoppingCart}
                   fontWeight="100"
@@ -144,9 +174,17 @@ const App: React.FC = () => {
           </Stack>
         </Container>
       </Box>
-      <Container alignSelf="center" maxWidth="container.xl" paddingX={0}>
+      <Stack
+        alignSelf="center"
+        paddingX={0}
+        marginTop="0rem!important"
+        backgroundColor="blackAlpha.200"
+        min-height="100vh"
+        height="fit-content"
+        width="100%"
+      >
         <Routes />
-      </Container>
+      </Stack>
     </Stack>
   );
 };
