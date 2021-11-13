@@ -7,7 +7,7 @@ const HomeScreen: React.FC = () => {
       <Container maxWidth="container.xl" paddingX={0} my={4}>
         <Text>{`<HomeScreen />`}</Text>
         <br />
-        <Link href="/product">Ver página de detalle de producto</Link>
+        <Link to="/product">Ver página de detalle de producto</Link>
       </Container>
     </Stack>
   );
