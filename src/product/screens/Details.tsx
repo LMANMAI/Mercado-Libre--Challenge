@@ -2,23 +2,13 @@ import React from "react";
 
 import { Product } from "../types";
 import mock from "../mock";
-import {
-  Container,
-  Stack,
-  Box,
-  Image,
-  Text,
-  Input,
-  Icon,
-  StackDivider,
-} from "@chakra-ui/react";
+import { Container, Stack, Box, Text } from "@chakra-ui/react";
 import { ProductImageCarrousel } from "../../components";
 interface Props {
   product: Product;
 }
 
 const DetailsScreen: React.FC<Props> = ({ product = mock.product }) => {
-  console.log(product);
   return (
     <Box width="80%" alignSelf="center" minHeight="50%" height="fit-content">
       <Stack

@@ -16,6 +16,7 @@ const App: React.FC = () => {
         width="100%"
       >
         <Routes />
+        footer
       </Stack>
     </Stack>
   );
