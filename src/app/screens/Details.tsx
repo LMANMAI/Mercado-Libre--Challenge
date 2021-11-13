@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Product } from "../../product/types";
 import mock from "../../product/mock";
 import { Container, Stack, Box, Text } from "@chakra-ui/react";
