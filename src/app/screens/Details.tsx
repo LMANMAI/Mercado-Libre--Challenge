@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Product } from "../types";
-import mock from "../mock";
+import { Product } from "../../product/types";
+import mock from "../../product/mock";
 import { Container, Stack, Box, Text } from "@chakra-ui/react";
 import { ProductImageCarrousel } from "../../components";
 interface Props {
