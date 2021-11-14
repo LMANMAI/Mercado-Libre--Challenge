@@ -33,7 +33,7 @@ const DetailsScreen: React.FC<Props> = ({ product = mock.product }) => {
         backgroundColor="white"
         marginBottom={5}
       >
-        <Stack direction={{ base: "column", md: "row" }} height="100%">
+        <Stack direction={{ base: "column", lg: "row" }} height="100%">
           <Stack flex={2}>
             <ProductImageCarrousel product={product} />
           </Stack>

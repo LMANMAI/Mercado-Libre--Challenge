@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Stack, Image } from "@chakra-ui/react";
 import { Product, ProductPicture } from "../product/types";
 interface IProductImage {
@@ -11,14 +11,21 @@ interface IProductImage {
 }
 const ProductImageCarrousel = (props: { product: Product }) => {
   const [image, setImage] = useState<IProductImage | ProductPicture>();
+  const [border, setBorder] = useState<boolean>(false);
 
   if (image === undefined) {
     setImage(props?.product?.pictures[0]);
   }
 
-  const handleClick = (picture: any) => {
+  const handleHover = (picture: any) => {
     setImage(picture);
   };
+  const handleChange = (id: string) => {
+    setBorder(!border);
+  };
+  useEffect(() => {
+    console.log("valor del border", border);
+  }, [border]);
   return (
     <Stack
       direction={{ base: "column-reverse", md: "row" }}
@@ -37,13 +44,16 @@ const ProductImageCarrousel = (props: { product: Product }) => {
             w="48px"
             h="48px"
             p={1}
-            border="2px solid rgba(0,0,0,.25)"
+            border={border ? "2px solid #3483fa" : "2px solid rgba(0,0,0,.25)"}
             borderRadius="6px"
             cursor="pointer"
             _hover={{
               border: "2px solid #3483fa",
             }}
-            onMouseOver={() => handleClick(picture)}
+            _active={{
+              border: "2px solid #3483fa",
+            }}
+            onMouseOver={() => handleHover(picture)}
             key={picture.id}
           >
             <Image
@@ -51,6 +61,7 @@ const ProductImageCarrousel = (props: { product: Product }) => {
               height="100%"
               width="100%"
               objectFit="cover"
+              //   onClick={() => handleChange(picture.id)}
             />
           </Stack>
         ))}
