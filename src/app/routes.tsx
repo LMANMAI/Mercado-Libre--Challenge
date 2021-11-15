@@ -6,7 +6,7 @@ const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact component={HomeScreen} path="/" />
-      <Route exact component={DetailsScreen} path="/product" />
+      <Route exact component={DetailsScreen} path="/:productId" />
       <Redirect to="/" />
     </Switch>
   );

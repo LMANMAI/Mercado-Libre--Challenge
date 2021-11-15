@@ -23,9 +23,9 @@ const ProductImageCarrousel = (props: { product: Product }) => {
   const handleChange = (id: string) => {
     setBorder(!border);
   };
-  useEffect(() => {
-    console.log("valor del border", border);
-  }, [border]);
+  // useEffect(() => {
+  //   console.log("valor del border", border);
+  // }, [border]);
   return (
     <Stack
       direction={{ base: "column-reverse", md: "row" }}
@@ -48,10 +48,7 @@ const ProductImageCarrousel = (props: { product: Product }) => {
             borderRadius="6px"
             cursor="pointer"
             _hover={{
-              border: "2px solid #3483fa",
-            }}
-            _active={{
-              border: "2px solid #3483fa",
+              border: `2px solid #3483fa`,
             }}
             onMouseOver={() => handleHover(picture)}
             key={picture.id}
@@ -66,11 +63,11 @@ const ProductImageCarrousel = (props: { product: Product }) => {
           </Stack>
         ))}
       </Stack>
-      <Stack flex={1} my={3} alignSelf="center">
+      <Stack flex={1} my={3} alignSelf="center" p={4}>
         <Stack
           borderRadius="6px"
           cursor="zoom-in"
-          w="410px"
+          min-width="410px"
           height="500px"
           p={4}
         >
@@ -81,6 +78,7 @@ const ProductImageCarrousel = (props: { product: Product }) => {
             objectFit="contain"
           />
         </Stack>
+        <hr />
       </Stack>
     </Stack>
   );
