@@ -7,15 +7,11 @@ import App from "./app";
 import theme from "./theme";
 
 ReactDOM.render(
-  <>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <Fonts />
-    <BrowserRouter>
-      <ChakraProvider theme={theme}>
-        <Fonts />
-        <App />
-      </ChakraProvider>
-    </BrowserRouter>
-  </>,
+  <BrowserRouter>
+    <ChakraProvider theme={theme}>
+      <Fonts />
+      <App />
+    </ChakraProvider>
+  </BrowserRouter>,
   document.getElementById("root")
 );
