@@ -9,6 +9,7 @@ import theme from "./theme";
 ReactDOM.render(
   <>
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <Fonts />
     <BrowserRouter>
       <ChakraProvider theme={theme}>
         <Fonts />
