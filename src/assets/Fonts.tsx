@@ -6,21 +6,21 @@ const Fonts = () => (
     styles={`@font-face{
           font-family: "Proxima Nova";
            font-style: normal;          
-         src: url("/src/assets/fonts/proximanova-light.woff2") format('woff2');
+         src: local("Proxima Nova"), url("/src/assets/fonts/proximanova-light.woff2") format('woff2');
           font-weight: 100;
          }
 
       @font-face {
           font-family: "Proxima Nova";
            font-style: normal;          
-             src: url("/src/assets/fonts/proximanova-regular.woff2") format('woff2');
+             src: local("Proxima Nova"), url("/src/assets/fonts/proximanova-regular.woff2") format('woff2');
           font-weight: normal;          
       }
 
       @font-face {
           font-family: "Proxima Nova";
            font-style: normal;          
-             src: url("/src/assets/fonts/proximanova-semibold.woff2") format('woff2');
+             src: local("Proxima Nova"), url("/src/assets/fonts/proximanova-semibold.woff2") format('woff2');
           font-weight: 500;           
       }
       `}
