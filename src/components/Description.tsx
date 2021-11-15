@@ -6,7 +6,6 @@ import { HiOutlineTruck } from "react-icons/hi";
 import { IoReturnDownBack } from "react-icons/io5";
 const Description = (props: { product: Product }) => {
   const { product } = props;
-  console.log(product);
   const priceFormater = new Intl.NumberFormat(product.currency_id, {
     style: "currency",
     currency: product.currency_id,

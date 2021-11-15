@@ -24,13 +24,12 @@ const DetailsScreen: React.FC = () => {
       >
         <Text fontWeight="bold">También puede interesarte microfono </Text>
         <Text>
-          - inalambrico karaoke - parlantes portatiles - auriculares vincha
-          inalambricos - mavic air 2 - auriculares airpod
+          - monopatin - pistolas de agua - traxxas e revo - pizarra blanca
+          80x120 - cama elastica usada
         </Text>
       </Stack>
       <Text margin={4} spacing={2} color="primary.200.600">
-        {`Volver al listado | Electrónica, Audio y Video > Televisores > Philips > LED > 50 " > 4K > Es
-        smart`}
+        {`Volver al listado |Juegos y Juguetes > Peluches`}
       </Text>
       <Container
         width="100%"

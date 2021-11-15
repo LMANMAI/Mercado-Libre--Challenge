@@ -100,4 +100,9 @@ export default extendTheme({
       },
     },
   },
+  textStyles: {
+    body: {
+      fontFamily: "Proxima Nova",
+    },
+  },
 });
