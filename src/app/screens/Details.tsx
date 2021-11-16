@@ -1,7 +1,7 @@
 import React from "react";
 import { Product } from "../../product/types";
 import { Container, Stack, Box, Text } from "@chakra-ui/react";
-import { ProductImageCarrousel, Description } from "../../components";
+import { ProductImageCarrousel, SideShop, Description } from "../../components";
 import { useLocation } from "react-router-dom";
 
 const DetailsScreen: React.FC = () => {
@@ -42,9 +42,10 @@ const DetailsScreen: React.FC = () => {
         <Stack direction={{ base: "column", lg: "row" }} height="100%">
           <Stack flex={2}>
             <ProductImageCarrousel product={productQuery} />
+            <Description />
           </Stack>
           <Stack flex={1} padding={2}>
-            <Description product={productQuery} />
+            <SideShop product={productQuery} />
           </Stack>
         </Stack>
       </Container>
