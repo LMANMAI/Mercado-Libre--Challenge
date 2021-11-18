@@ -6,14 +6,19 @@ import { HiOutlineTruck } from "react-icons/hi";
 import { IoReturnDownBack } from "react-icons/io5";
 const SideShop = (props: { product: Product }) => {
   const { product } = props;
-  console.log(product);
   const priceFormater = new Intl.NumberFormat(product.currency_id, {
     style: "currency",
     currency: product.currency_id,
     minimumFractionDigits: 0,
   });
   return (
-    <Stack height="100%" padding="24px 16px" py={4} px={2} position="sticky">
+    <Stack
+      height="fit-content"
+      padding="24px 16px"
+      py={4}
+      px={2}
+      position="sticky"
+    >
       <Stack
         border="1px solid rgba(0,0,0,.1)"
         borderRadius="8px"

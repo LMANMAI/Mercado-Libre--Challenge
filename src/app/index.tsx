@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack } from "@chakra-ui/react";
 import Routes from "./routes";
-import { NavBar } from "../components";
+import { NavBar, FooterSection } from "../components";
 const App: React.FC = () => {
   return (
     <Stack>
@@ -16,7 +16,7 @@ const App: React.FC = () => {
         width="100%"
       >
         <Routes />
-        footer
+        <FooterSection />
       </Stack>
     </Stack>
   );

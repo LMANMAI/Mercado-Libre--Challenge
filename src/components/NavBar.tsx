@@ -36,10 +36,14 @@ const NavBar = () => {
               direction="row"
               spacing={{ base: 7, md: 12 }}
               flex={1}
-              alignItems={{ base: "center", md: "initial" }}
+              alignItems="center"
+              justifyContent="center"
             >
               <Link to="/">
-                <Image width="fit-content" objectFit="contain" src={logo} />
+                {/* <Image width="fit-content" objectFit="contain" src={logo} /> */}
+                <Text fontWeight="bolder" color="#002660">
+                  ML LOGO
+                </Text>
               </Link>
               <Stack
                 backgroundColor="white"
