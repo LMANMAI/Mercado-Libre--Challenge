@@ -1,11 +1,12 @@
 import React from "react";
 import { Product } from "../../product/types";
-import { Container, Stack, Box, Text } from "@chakra-ui/react";
+import { Container, Stack, Box, Text, Link } from "@chakra-ui/react";
 import {
   ProductImageCarrousel,
   SideShop,
   Description,
   QA,
+  SellerInfo,
 } from "../../components";
 import { useLocation } from "react-router-dom";
 
@@ -15,7 +16,7 @@ const DetailsScreen: React.FC = () => {
   //console.log(productQuery);
   return (
     <Box
-      minWidth={{ md: "800px" }}
+      minWidth={{ base: "fit-content", md: "800px" }}
       width="80%"
       alignSelf="center"
       minHeight="50%"
@@ -37,7 +38,7 @@ const DetailsScreen: React.FC = () => {
         {`Volver al listado |Juegos y Juguetes > Peluches`}
       </Text>
       <Container
-        width="100%"
+        width={{ base: "fit-content", xl: "100%" }}
         height="fit-content"
         min-height="100vh"
         maxWidth="initial"
@@ -57,9 +58,24 @@ const DetailsScreen: React.FC = () => {
           </Stack>
           <Stack flex={1} padding={2}>
             <SideShop product={productQuery} />
+            <SellerInfo />
           </Stack>
         </Stack>
       </Container>
+      <Stack
+        my={2}
+        direction="row"
+        width="100%"
+        justifyContent="flex-end"
+        mr="4px"
+      >
+        <Text>Publicación </Text>
+        <Text fontWeight="bold">#754048812 </Text>
+        <p>|</p>
+        <Link color="#3483fa" href="">
+          Denunciar
+        </Link>
+      </Stack>
     </Box>
   );
 };

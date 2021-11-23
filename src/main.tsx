@@ -5,13 +5,16 @@ import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import Fonts from "./assets/Fonts";
 import App from "./app";
 import theme from "./theme";
+import ProductProvider from "./context/ProductContext";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <ChakraProvider theme={theme}>
-      <Fonts />
-      <App />
-    </ChakraProvider>
-  </BrowserRouter>,
+  <ProductProvider>
+    <BrowserRouter>
+      <ChakraProvider theme={theme}>
+        <Fonts />
+        <App />
+      </ChakraProvider>
+    </BrowserRouter>
+  </ProductProvider>,
   document.getElementById("root")
 );
