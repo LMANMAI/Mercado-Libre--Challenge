@@ -53,7 +53,7 @@ const DetailsScreen: React.FC = () => {
         >
           <Stack flex={2} marginLeft="20px">
             <ProductImageCarrousel product={productQuery} />
-            <Description product={productQuery} />
+            <Description />
             <QA />
           </Stack>
           <Stack flex={1} padding={2}>

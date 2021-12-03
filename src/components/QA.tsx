@@ -101,7 +101,7 @@ const QA = () => {
         </form>
       </Stack>
       <Stack mt="40px!important">
-        {questions.length === 0 ? (
+        {questions.length !== 1 ? (
           <Text fontSize="18px" fontWeight="600" lineHeight="1.25">
             Todavia no se realizaron preguntas
           </Text>

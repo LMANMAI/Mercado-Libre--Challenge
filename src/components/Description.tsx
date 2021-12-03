@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { TableCaption, Table, Tr, Th, Tbody, Td } from "@chakra-ui/react";
-import { Product } from "../product/types";
 import { ProductContext } from "../context/ProductContext";
 const Description = () => {
   const productcontext = useContext(ProductContext);
