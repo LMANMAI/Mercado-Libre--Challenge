@@ -1,23 +1,15 @@
-import React, { createContext, useState } from "react";
-import { Product } from "../product/types";
-import mock from "../product/mock";
-interface ProductContext {
+import React, { createContext } from "react";
+interface IProductContext {
   product: Product;
+  questions: [string];
+  setQuestions: Function;
 }
-export const ProductContext = createContext<null | ProductContext>(null);
+import { Product } from "../product/types";
 
-export const ProductProvider: React.FC<Product> = (props) => {
-  const [product, setProduct] = useState(mock.product);
-
-  return (
-    <ProductContext.Provider
-      value={{
-        product,
-      }}
-    >
-      {props.children}
-    </ProductContext.Provider>
-  );
-};
-
-export default ProductProvider;
+import mock from "../product/mock";
+export const ProductContext = createContext<IProductContext>({
+  product: mock.product,
+  questions: [""],
+  setQuestions: () => {},
+});
+export default ProductContext;

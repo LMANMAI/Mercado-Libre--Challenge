@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text, Stack, Container } from "@chakra-ui/react";
-import { Product } from "../../product/types";
-import mock from "../../product/mock";
 import { Link } from "react-router-dom";
-interface Props {
-  product: Product;
-}
+import { ProductContext } from "../../context/ProductContext";
 
-const HomeScreen: React.FC<Props> = ({ product = mock.product }) => {
+const HomeScreen: React.FC = () => {
+  const { product } = useContext(ProductContext);
+  console.log("Producto desde el context", product);
   return (
     <Stack min-height="100vh" height="100%">
       <Container maxWidth="container.xl" paddingX={0} my={4}>
