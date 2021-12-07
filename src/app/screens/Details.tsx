@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 const DetailsScreen: React.FC = () => {
   const { state } = useLocation<Product>();
   const productQuery = state;
-  //console.log(productQuery);
+  const { id } = productQuery;
   return (
     <Box
       minWidth={{ base: "fit-content", md: "800px" }}
@@ -57,7 +57,7 @@ const DetailsScreen: React.FC = () => {
             <QA />
           </Stack>
           <Stack flex={1} padding={2}>
-            <SideShop product={productQuery} />
+            <SideShop />
             <SellerInfo />
           </Stack>
         </Stack>
@@ -66,11 +66,11 @@ const DetailsScreen: React.FC = () => {
         my={2}
         direction="row"
         width="100%"
-        justifyContent="flex-end"
+        justifyContent={{ base: "center", md: "flex-end" }}
         mr="4px"
       >
         <Text>Publicación </Text>
-        <Text fontWeight="bold">#754048812 </Text>
+        <Text fontWeight="bold"># {id.substring(3, 12)} </Text>
         <p>|</p>
         <Link color="#3483fa" href="">
           Denunciar

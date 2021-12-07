@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Stack, Text, Icon, Button } from "@chakra-ui/react";
-import { Product } from "../product/types";
 import { FiHeart } from "react-icons/fi";
 import { HiOutlineTruck } from "react-icons/hi";
 import { IoReturnDownBack } from "react-icons/io5";
 import { ContainerBorder } from "./";
-const SideShop = (props: { product: Product }) => {
-  const { product } = props;
+import { ProductContext } from "../context/ProductContext";
+const SideShop = () => {
+  const productcontext = useContext(ProductContext);
+  const { product, setCart } = productcontext;
   const priceFormater = new Intl.NumberFormat(product.currency_id, {
     style: "currency",
     currency: product.currency_id,
@@ -15,7 +16,10 @@ const SideShop = (props: { product: Product }) => {
   return (
     <ContainerBorder>
       <Stack>
-        <Text>Nuevo | 9 vendidos</Text>
+        <Text>
+          {` ${product.condition === "new" ? "Nuevo" : "Usado"} | 
+           ${product.sold_quantity} vendidos`}
+        </Text>
       </Stack>
       <Stack direction="row" id="titulo">
         <Text
@@ -105,7 +109,9 @@ const SideShop = (props: { product: Product }) => {
         </Stack>
       </Stack>
       <Text fontWeight="bold" fontSize="20px" mt="20px">
-        ¡Última disponible!
+        {product.available_quantity === 1
+          ? "¡Última disponible!"
+          : `${product.available_quantity} unidades disponibles`}
       </Text>
       <Stack id="botones">
         <Button
@@ -135,6 +141,7 @@ const SideShop = (props: { product: Product }) => {
           _hover={{
             backgroundColor: "rgba(65,137,230,.2)",
           }}
+          onClick={() => setCart()}
         >
           Agregar al carrito
         </Button>

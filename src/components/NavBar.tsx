@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Stack,
@@ -8,12 +8,34 @@ import {
   Icon,
   StackDivider,
 } from "@chakra-ui/react";
-
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 import { FiPrinter, FiMapPin } from "react-icons/fi";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import styled from "@emotion/styled";
+import ProductContext from "../context/ProductContext";
+
+const CartWraper = styled.div`
+  position: relative;
+  span {
+    position: absolute;
+    top: 0px;
+    right: 6px;
+    background: #fff519;
+    width: 10px;
+    height: 10px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-radius: 100%;
+    font-size: 12px;
+    align-items: center;
+  }
+`;
 const NavBar = () => {
+  const productContext = useContext(ProductContext);
+  const { cart } = productContext;
   return (
     <>
       <Stack
@@ -47,7 +69,6 @@ const NavBar = () => {
                 justifyContent="center"
               >
                 <Link to="/">
-                  {/* <Image width="fit-content" objectFit="contain" src={logo} /> */}
                   <Text fontWeight="bolder" color="#002660">
                     ML LOGO
                   </Text>
@@ -172,12 +193,15 @@ const NavBar = () => {
                 <Text>Creá tu Cuenta</Text>
                 <Text>Ingresá</Text>
                 <Text>Mis compras</Text>
-                <Icon
-                  display="flex"
-                  fontSize={20}
-                  as={HiOutlineShoppingCart}
-                  fontWeight="100"
-                />
+                <CartWraper>
+                  <Icon
+                    display="flex"
+                    fontSize={25}
+                    as={HiOutlineShoppingCart}
+                    fontWeight="100"
+                  />
+                  {cart === 0 ? null : <span>{cart}</span>}
+                </CartWraper>
               </Stack>
             </Stack>
           </Stack>

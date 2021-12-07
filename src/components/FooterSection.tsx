@@ -42,7 +42,7 @@ const FooterSection = () => {
             fontSize="14px"
           >
             <Stack
-              direction="row"
+              direction={{ base: "column", md: "row" }}
               justifyContent="space-between"
               spacing={5}
               p="0 110px"
@@ -110,7 +110,7 @@ const FooterSection = () => {
             <Text fontSize="14px" color="#999">
               Copyright © 1999-2021
             </Text>
-            <Stack direction="row" spacing={3}>
+            <Stack direction={{ base: "column", md: "row" }} spacing={3}>
               <Link href="" pl="0px" color="#333" fontSize="14px">
                 Trabajá con nosotros
               </Link>

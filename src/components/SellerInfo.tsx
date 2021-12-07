@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text, Stack, Icon } from "@chakra-ui/react";
 import { ContainerBorder } from "./";
 import { RiMapPin2Line } from "react-icons/ri";
+import { ProductContext } from "../context/ProductContext";
+
 const SellerInfo = () => {
+  const productcontext = useContext(ProductContext);
+  const { product } = productcontext;
   return (
     <ContainerBorder>
-      <Text fontSize="18px" mb="28px" mr="15px">
+      <Text fontSize="18px" mr="15px">
         Información sobre el vendedor
       </Text>
       <Stack id="ubicacion" direction="row" alignItems="center">
@@ -17,7 +21,8 @@ const SellerInfo = () => {
             Ubicación
           </Text>
           <Text m="0px!important" fontSize="14px" color="rgba(0,0,0,.55)">
-            Adrogue, Buenos Aires
+            {product.seller_address.country.name},
+            {product.seller_address.city.name}
           </Text>
         </Stack>
       </Stack>

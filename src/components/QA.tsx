@@ -2,35 +2,44 @@ import React, { useState, useContext, FormEvent } from "react";
 import { Stack, Text, Button, Input } from "@chakra-ui/react";
 import { ProductContext } from "../context/ProductContext";
 interface IQa {
-  qa: string;
+  question: string;
+  answer: string;
+  id: string;
 }
 const QA = () => {
   //Context
   const productcontext = useContext(ProductContext);
   const { questions, setQuestions } = productcontext;
-  const [question, setQuestion] = useState<IQa>({
-    qa: "",
+  const [qa, setQuestion] = useState<IQa>({
+    question: "",
+    answer: "",
+    id: "",
   });
-  const { qa } = question;
+  const { question } = qa;
   const handdleCahnge = (e: any) => {
     // setQuestion({
     //   [e.target.name]: e.target.value,
     // });
     setQuestion({
-      ...question,
+      ...qa,
       [e.target.name]: e.target.value,
     });
   };
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setQuestions(qa);
+    setQuestions(question);
+    setQuestion({
+      question: "",
+      answer: "",
+      id: "",
+    });
   };
   return (
     <Stack paddingTop="40px">
       <Text fontSize="1.5em">Preguntas y respuestas</Text>
       <Stack>
         <Text>¿Qué querés saber?</Text>
-        <Stack direction="row">
+        <Stack direction={{ base: "column", md: "row" }}>
           <Button
             mr="12px!important"
             mt="12px!important"
@@ -84,9 +93,10 @@ const QA = () => {
               placeholder="Escribe tu pregunta..."
               height="48px"
               type="text"
-              value={qa}
-              name="qa"
+              value={question}
+              name="question"
               onChange={handdleCahnge}
+              autoComplete="off"
             />
             <Button
               backgroundColor="#3483fa"
@@ -101,22 +111,27 @@ const QA = () => {
         </form>
       </Stack>
       <Stack mt="40px!important">
-        {questions.length !== 1 ? (
-          <Text fontSize="18px" fontWeight="600" lineHeight="1.25">
-            Todavia no se realizaron preguntas
-          </Text>
+        {questions.length > 0 ? (
+          <Text> Ultimas preguntas realizadas</Text>
         ) : (
-          <Stack color="rgba(0,0,0,.9)">
-            <Text fontSize="18px" fontWeight="600" lineHeight="1.25">
-              Últimas realizadas
-            </Text>
-            {questions.map((question: string, index) => (
-              <Text fontSize="16px" key={index}>
-                {question}
-              </Text>
-            ))}
-          </Stack>
+          <Text>Todavia no se realizaron preguntas</Text>
         )}
+        {questions.map((question: string, index) => {
+          if (question.length > 0) {
+            return (
+              <Stack bg="rgba(0,0,0,.04)" borderRadius="6px" p="1rem" mt="25px">
+                <Text fontSize="16px" key={index}>
+                  <Stack direction="row">
+                    <Text>{question}</Text>
+                    <Text fontSize="12px">Responder</Text>
+                  </Stack>
+                </Text>
+                <Stack></Stack>
+                <Text>{"  "}└ Respuesta</Text>
+              </Stack>
+            );
+          }
+        })}
       </Stack>
     </Stack>
   );

@@ -23,9 +23,6 @@ const ProductImageCarrousel = (props: { product: Product }) => {
   const handleChange = (id: string) => {
     setBorder(!border);
   };
-  // useEffect(() => {
-  //   console.log("valor del border", border);
-  // }, [border]);
   return (
     <Stack
       direction={{ base: "column-reverse", md: "row" }}
