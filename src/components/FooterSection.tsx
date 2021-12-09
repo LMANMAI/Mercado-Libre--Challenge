@@ -9,7 +9,6 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  Button,
 } from "@chakra-ui/react";
 
 const FooterSection = () => {
