@@ -28,8 +28,7 @@ const ProductImageCarrousel = (props: { product: Product }) => {
       direction={{ base: "column-reverse", md: "row" }}
       spacing={0}
       marginTop={4}
-      min-height="100%"
-      height="fit-content"
+      height="100%"
     >
       <Stack
         direction={{ base: "row", md: "column" }}
@@ -47,7 +46,7 @@ const ProductImageCarrousel = (props: { product: Product }) => {
             _hover={{
               border: `2px solid #3483fa`,
             }}
-            onMouseOver={() => handleHover(picture)}
+            onClick={() => handleHover(picture)}
             key={picture.id}
           >
             <Image

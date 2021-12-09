@@ -3,7 +3,7 @@ import ProductContext from "./ProductContext";
 import ProductReducer from "./ProductReducer";
 import mock from "../product/mock";
 import { Product } from "../product/types";
-import { SET_QUESTION, SET_ACTIVEPRODUCT, SET_CART } from "./types";
+import { SET_QUESTION, SET_ACTIVEPRODUCT, SET_BASKET } from "./types";
 interface IProps {
   children: JSX.Element | JSX.Element[] | Product;
 }
@@ -12,7 +12,7 @@ const ProductState = ({ children }: IProps) => {
     product: mock.product,
     productActive: null,
     questions: [],
-    cart: 0,
+    basket: [],
   };
 
   const [state, dispatch] = useReducer(ProductReducer, initialState);
@@ -30,9 +30,10 @@ const ProductState = ({ children }: IProps) => {
       payload: product,
     });
   };
-  const setCart = () => {
+  const setbasket = (product: Product) => {
     dispatch({
-      type: SET_CART,
+      type: SET_BASKET,
+      payload: product,
     });
   };
   //return
@@ -42,10 +43,10 @@ const ProductState = ({ children }: IProps) => {
         product: state.product,
         productActive: state.productActive,
         questions: state.questions,
-        cart: state.cart,
+        basket: state.basket,
         setQuestions,
         setProductActive,
-        setCart,
+        setbasket,
       }}
     >
       {children}

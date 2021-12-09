@@ -7,6 +7,7 @@ import {
   Input,
   Icon,
   StackDivider,
+  Image,
 } from "@chakra-ui/react";
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 import { FiPrinter, FiMapPin } from "react-icons/fi";
@@ -15,7 +16,7 @@ import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import ProductContext from "../context/ProductContext";
 
-const CartWraper = styled.div`
+const BasketWraper = styled.div`
   position: relative;
   span {
     position: absolute;
@@ -35,7 +36,8 @@ const CartWraper = styled.div`
 `;
 const NavBar = () => {
   const productContext = useContext(ProductContext);
-  const { cart } = productContext;
+  const { basket } = productContext;
+
   return (
     <>
       <Stack
@@ -193,20 +195,27 @@ const NavBar = () => {
                 <Text>Creá tu Cuenta</Text>
                 <Text>Ingresá</Text>
                 <Text>Mis compras</Text>
-                <CartWraper>
+                <BasketWraper>
                   <Icon
                     display="flex"
                     fontSize={25}
                     as={HiOutlineShoppingCart}
                     fontWeight="100"
                   />
-                  {cart === 0 ? null : <span>{cart}</span>}
-                </CartWraper>
+                  {basket.length === 0 ? null : <span>{basket.length}</span>}
+                </BasketWraper>
               </Stack>
             </Stack>
           </Stack>
         </Container>
       </Box>
+      {basket.length != 0 ? (
+        <Container maxWidth="container.xl" paddingX={0}>
+          <Stack>
+            <p>s</p>
+          </Stack>
+        </Container>
+      ) : null}
     </>
   );
 };

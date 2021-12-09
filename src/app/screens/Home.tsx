@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext";
 
 const HomeScreen: React.FC = () => {
-  const { product } = useContext(ProductContext);
-  const {} = product;
-  console.log(product.thumbnail);
+  const { product, setProductActive } = useContext(ProductContext);
   const priceFormater = new Intl.NumberFormat(product.currency_id, {
     style: "currency",
     currency: product.currency_id,
@@ -32,6 +30,7 @@ const HomeScreen: React.FC = () => {
               pathname: `/${product.title}`,
               state: product,
             }}
+            onClick={() => setProductActive(product)}
           >
             <Stack id="iamge" h="224px" p="25px">
               <Image src={product.pictures[0].url} alt={product.id} />

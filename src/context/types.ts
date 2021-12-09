@@ -1,3 +1,3 @@
 export const SET_QUESTION = "SET_QUESTION";
 export const SET_ACTIVEPRODUCT = "SET_ACTIVEPRODUCT";
-export const SET_CART = "SET_CART";
+export const SET_BASKET = "SET_BASKET";

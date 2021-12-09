@@ -1,4 +1,4 @@
-import { SET_QUESTION, SET_ACTIVEPRODUCT, SET_CART } from "./types";
+import { SET_QUESTION, SET_ACTIVEPRODUCT, SET_BASKET } from "./types";
 export default (state: any, action: any) => {
   switch (action.type) {
     case SET_QUESTION:
@@ -11,10 +11,10 @@ export default (state: any, action: any) => {
         ...state,
         productActive: action.payload,
       };
-    case SET_CART:
+    case SET_BASKET:
       return {
         ...state,
-        cart: state.cart + 1,
+        basket: [...state.basket, action.payload],
       };
     default:
       return {

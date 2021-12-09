@@ -6,7 +6,7 @@ import { ProductContext } from "../context/ProductContext";
 
 const SellerInfo = () => {
   const productcontext = useContext(ProductContext);
-  const { product } = productcontext;
+  const { productActive } = productcontext;
   return (
     <ContainerBorder>
       <Text fontSize="18px" mr="15px">
@@ -21,8 +21,8 @@ const SellerInfo = () => {
             Ubicación
           </Text>
           <Text m="0px!important" fontSize="14px" color="rgba(0,0,0,.55)">
-            {product.seller_address.country.name},
-            {product.seller_address.city.name}
+            {productActive.seller_address.country.name},
+            {productActive.seller_address.city.name}
           </Text>
         </Stack>
       </Stack>

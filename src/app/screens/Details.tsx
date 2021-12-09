@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Product } from "../../product/types";
-import { Container, Stack, Box, Text, Link } from "@chakra-ui/react";
+import {
+  Container,
+  Stack,
+  Box,
+  Text,
+  Link,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import {
   ProductImageCarrousel,
   SideShop,
@@ -9,9 +17,12 @@ import {
   SellerInfo,
 } from "../../components";
 import { useLocation } from "react-router-dom";
+import ProductContext from "../../context/ProductContext";
 
 const DetailsScreen: React.FC = () => {
   const { state } = useLocation<Product>();
+  const productContext = useContext(ProductContext);
+  const { productActive } = productContext;
   const productQuery = state;
   const { id } = productQuery;
   return (
@@ -51,15 +62,29 @@ const DetailsScreen: React.FC = () => {
           p={2}
           pb="40px"
         >
-          <Stack flex={2} marginLeft="20px">
-            <ProductImageCarrousel product={productQuery} />
-            <Description />
-            <QA />
-          </Stack>
-          <Stack flex={1} padding={2}>
-            <SideShop />
-            <SellerInfo />
-          </Stack>
+          <Grid
+            templateRows={{ base: "repeat(4, 1fr)", md: "1fr" }}
+            templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+            h="fit-content"
+            w="100%"
+          >
+            <GridItem
+              colSpan={{ base: 1, md: 2 }}
+              colStart={1}
+              colEnd={3}
+              rowStart={1}
+              rowEnd={2}
+            >
+              <ProductImageCarrousel product={productQuery || productActive} />
+            </GridItem>
+            <GridItem colSpan={1}>
+              <SideShop />
+            </GridItem>
+            <GridItem colSpan={2} colStart={1} colEnd={3}>
+              <Description />
+              <QA />
+            </GridItem>
+          </Grid>
         </Stack>
       </Container>
       <Stack

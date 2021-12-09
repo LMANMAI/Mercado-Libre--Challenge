@@ -4,11 +4,11 @@ import { ProductContext } from "../context/ProductContext";
 
 const Description = () => {
   const productcontext = useContext(ProductContext);
-  const { product } = productcontext;
+  const { productActive } = productcontext;
   return (
     <Table w="100%">
       <Tbody>
-        {product.attributes.map((atribute: any, index: number) => {
+        {productActive.attributes.map((atribute: any, index: number) => {
           if (
             atribute.id === "BRAND" ||
             atribute.id === "MODEL" ||
