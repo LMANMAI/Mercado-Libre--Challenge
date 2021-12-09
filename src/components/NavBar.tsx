@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Container,
   Stack,
@@ -8,6 +8,7 @@ import {
   Icon,
   StackDivider,
   Image,
+  Button,
 } from "@chakra-ui/react";
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 import { FiPrinter, FiMapPin } from "react-icons/fi";
@@ -37,7 +38,15 @@ const BasketWraper = styled.div`
 const NavBar = () => {
   const productContext = useContext(ProductContext);
   const { basket } = productContext;
-
+  const [counter, setCounter] = useState<number>(0);
+  console.log(basket);
+  // useEffect(() => {
+  //   setCounter(
+  //     basket.map((product) => {
+  //       counter += product.price;
+  //     })
+  //   );
+  // }, basket);
   return (
     <>
       <Stack
@@ -210,11 +219,90 @@ const NavBar = () => {
         </Container>
       </Box>
       {basket.length != 0 ? (
-        <Container maxWidth="container.xl" paddingX={0}>
-          <Stack>
-            <p>s</p>
+        <Stack
+          maxWidth="container.xl"
+          paddingX={0}
+          margin="0px auto!important"
+          justifySelf="center"
+          w="80%"
+        >
+          <Stack
+            m="10px auto!important"
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Stack
+              direction="row"
+              borderRight="1px solid #E2E8F0"
+              p="10px"
+              m="10px"
+            >
+              <Image
+                src={basket[basket.length - 1].thumbnail}
+                w="64px "
+                h="64px"
+                borderRadius="100%"
+              />
+              <Stack justifySelf="end">
+                <Text
+                  color="#00a650"
+                  fontSize="20px"
+                  fontWeight="bold"
+                  lineHeight="1.25"
+                >
+                  Agregaste a tu carrito
+                </Text>
+                <Text>{basket[basket.length - 1].title}</Text>
+              </Stack>
+            </Stack>
+
+            <Stack direction="row">
+              <Stack direction="row" justifyContent="space-evenly">
+                <Text>{basket.length} productos en tu carrito:</Text>
+                <Text>$precio</Text>
+              </Stack>
+              <Image
+                src={basket[basket.length - 1].thumbnail}
+                w="40px "
+                h="40px"
+                borderRadius="100%"
+              />
+            </Stack>
+            <Stack direction="row" alignItems="center">
+              <Button
+                backgroundColor="#3483fa"
+                color="#fff"
+                fontSize="16px"
+                height="48px"
+                borderRadius="8px"
+                textAlign="center"
+                fontWeight="600"
+                padding="0px 24px"
+                transition="background 550ms ease-in-out"
+                _hover={{
+                  backgroundColor: "#2968c8",
+                }}
+              >
+                Ver Carrito
+              </Button>
+              <Button
+                backgroundColor="rgba(65,137,230,.2)"
+                color="#3483fa"
+                height="48px"
+                borderRadius="8px"
+                textAlign="center"
+                fontWeight="600"
+                padding="0px 24px"
+                _hover={{
+                  backgroundColor: "rgba(65,137,230,.2)",
+                }}
+              >
+                Comprar carrito
+              </Button>
+            </Stack>
           </Stack>
-        </Container>
+        </Stack>
       ) : null}
     </>
   );
