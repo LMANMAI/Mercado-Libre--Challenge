@@ -57,7 +57,7 @@ const NavBar = () => {
     setProductActive,
     buyIT,
   } = productContext;
-  let priceFormater;
+  let priceFormater: any;
   if (productActive) {
     priceFormater = new Intl.NumberFormat(productActive?.currency_id, {
       style: "currency",
