@@ -10,10 +10,9 @@ import {
   ModalContent,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { ProductContext } from "../context/ProductContext";
-import { useDisclosure } from "@chakra-ui/react";
 import "./styles.css";
 
 interface IQa {

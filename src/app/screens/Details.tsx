@@ -14,17 +14,13 @@ import {
   SideShop,
   Description,
   QA,
-  SellerInfo,
 } from "../../components";
 import { useLocation } from "react-router-dom";
 import ProductContext from "../../context/ProductContext";
 
 const DetailsScreen: React.FC = () => {
-  const { state } = useLocation<Product>();
   const productContext = useContext(ProductContext);
   const { productActive } = productContext;
-  const productQuery = state;
-  const { id } = productQuery;
   return (
     <Box
       minWidth={{ base: "fit-content", md: "800px" }}
@@ -75,7 +71,7 @@ const DetailsScreen: React.FC = () => {
               rowStart={1}
               rowEnd={2}
             >
-              <ProductImageCarrousel product={productQuery || productActive} />
+              <ProductImageCarrousel />
             </GridItem>
             <GridItem colSpan={1}>
               <SideShop />
@@ -95,7 +91,7 @@ const DetailsScreen: React.FC = () => {
         mr="4px"
       >
         <Text>Publicación </Text>
-        <Text fontWeight="bold"># {id.substring(3, 12)} </Text>
+        <Text fontWeight="bold"># {productActive?.id?.substring(3, 12)} </Text>
         <p>|</p>
         <Link color="#3483fa" href="">
           Denunciar

@@ -3,7 +3,13 @@ import ProductContext from "./ProductContext";
 import ProductReducer from "./ProductReducer";
 import mock from "../product/mock";
 import { Product } from "../product/types";
-import { SET_QUESTION, SET_ACTIVEPRODUCT, SET_BASKET } from "./types";
+import {
+  SET_QUESTION,
+  SET_ACTIVEPRODUCT,
+  SET_BASKET,
+  REMOVE_PRODUCT,
+  BUY_IT,
+} from "./types";
 interface IProps {
   children: JSX.Element | JSX.Element[] | Product;
 }
@@ -13,6 +19,7 @@ const ProductState = ({ children }: IProps) => {
     productActive: null,
     questions: [],
     basket: [],
+    basketvalue: 0,
   };
 
   const [state, dispatch] = useReducer(ProductReducer, initialState);
@@ -36,7 +43,17 @@ const ProductState = ({ children }: IProps) => {
       payload: product,
     });
   };
-  //return
+  const removeProduct = (producto: Product) => {
+    dispatch({
+      type: REMOVE_PRODUCT,
+      payload: producto,
+    });
+  };
+  const buyIT = () => {
+    dispatch({
+      type: BUY_IT,
+    });
+  };
   return (
     <ProductContext.Provider
       value={{
@@ -44,9 +61,12 @@ const ProductState = ({ children }: IProps) => {
         productActive: state.productActive,
         questions: state.questions,
         basket: state.basket,
+        basketvalue: state.basketvalue,
         setQuestions,
         setProductActive,
         setbasket,
+        removeProduct,
+        buyIT,
       }}
     >
       {children}

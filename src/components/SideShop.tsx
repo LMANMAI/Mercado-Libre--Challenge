@@ -8,8 +8,8 @@ import { ProductContext } from "../context/ProductContext";
 import { Product } from "../product/types";
 const SideShop = () => {
   const productcontext = useContext(ProductContext);
-  const { productActive, setbasket } = productcontext;
-  const priceFormater = new Intl.NumberFormat(productActive.currency_id, {
+  const { productActive, setbasket, setProductActive } = productcontext;
+  const priceFormater = new Intl.NumberFormat(productActive?.currency_id, {
     style: "currency",
     currency: productActive.currency_id,
     minimumFractionDigits: 0,
@@ -17,13 +17,18 @@ const SideShop = () => {
   const handleCart = (producto: Product) => {
     setbasket(producto);
   };
+  const handleBuy = () => {
+    let newQuantity = productActive.available_quantity - 1;
+    productActive.available_quantity = newQuantity;
+    setProductActive(productActive);
+  };
   return (
     <>
       <ContainerBorder>
         <Stack>
           <Text>
-            {` ${productActive.condition === "new" ? "Nuevo" : "Usado"} | 
-           ${productActive.sold_quantity} vendidos`}
+            {` ${productActive?.condition === "new" ? "Nuevo" : "Usado"} | 
+           ${productActive?.sold_quantity} vendidos`}
           </Text>
         </Stack>
         <Stack direction="row" id="titulo">
@@ -34,7 +39,7 @@ const SideShop = () => {
             mb="8px"
             mr="15px"
           >
-            {productActive.title}
+            {productActive?.title}
           </Text>
           <Icon
             as={FiHeart}
@@ -114,9 +119,9 @@ const SideShop = () => {
           </Stack>
         </Stack>
         <Text fontWeight="bold" fontSize="20px" mt="20px">
-          {productActive.available_quantity === 1
+          {productActive?.available_quantity === 1
             ? "¡Última disponible!"
-            : `${productActive.available_quantity} unidades disponibles`}
+            : `${productActive?.available_quantity} unidades disponibles`}
         </Text>
         <Stack id="botones">
           <Button
@@ -132,7 +137,8 @@ const SideShop = () => {
             _hover={{
               backgroundColor: "#2968c8",
             }}
-            disabled={productActive.available_quantity <= 0}
+            disabled={productActive?.available_quantity <= 0}
+            onClick={() => handleBuy()}
           >
             Comprar ahora
           </Button>
@@ -148,6 +154,7 @@ const SideShop = () => {
               backgroundColor: "rgba(65,137,230,.2)",
             }}
             onClick={() => handleCart(productActive)}
+            disabled={productActive?.available_quantity <= 0}
           >
             Agregar al carrito
           </Button>
@@ -157,5 +164,4 @@ const SideShop = () => {
     </>
   );
 };
-
 export default SideShop;

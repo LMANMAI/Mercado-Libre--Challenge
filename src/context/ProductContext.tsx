@@ -3,10 +3,13 @@ interface IProductContext {
   product: Product;
   productActive: Product;
   basket: Product[];
+  basketvalue: number;
   questions: [string];
   setQuestions: Function;
   setProductActive: Function;
   setbasket: Function;
+  removeProduct: Function;
+  buyIT: Function;
 }
 import { Product } from "../product/types";
 import mock from "../product/mock";
@@ -72,9 +75,12 @@ export const ProductContext = createContext<IProductContext>({
       channels: [],
     },
   ],
+  basketvalue: 0,
   questions: [""],
   setQuestions: () => {},
   setProductActive: () => {},
   setbasket: () => {},
+  removeProduct: () => {},
+  buyIT: () => {},
 });
 export default ProductContext;

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Container,
   Stack,
@@ -9,6 +9,14 @@ import {
   StackDivider,
   Image,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalHeader,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { AiOutlineSearch, AiOutlineMenu } from "react-icons/ai";
 import { FiPrinter, FiMapPin } from "react-icons/fi";
@@ -16,9 +24,11 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import ProductContext from "../context/ProductContext";
+import { Product } from "../product/types";
 
-const BasketWraper = styled.div`
+const BasketWraper = styled.button`
   position: relative;
+  outline: none;
   span {
     position: absolute;
     top: 0px;
@@ -36,19 +46,122 @@ const BasketWraper = styled.div`
   }
 `;
 const NavBar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [basketproducts, setBasketProducts] = useState<Product[]>([]);
   const productContext = useContext(ProductContext);
-  const { basket } = productContext;
-  const [counter, setCounter] = useState<number>(0);
-  console.log(basket);
-  // useEffect(() => {
-  //   setCounter(
-  //     basket.map((product) => {
-  //       counter += product.price;
-  //     })
-  //   );
-  // }, basket);
+  const {
+    productActive,
+    basket,
+    basketvalue,
+    removeProduct,
+    setProductActive,
+    buyIT,
+  } = productContext;
+  let priceFormater;
+  if (productActive) {
+    priceFormater = new Intl.NumberFormat(productActive?.currency_id, {
+      style: "currency",
+      currency: productActive?.currency_id,
+      minimumFractionDigits: 0,
+    });
+  }
+  const handleModal = () => {
+    onOpen();
+  };
+  const handdleRemove = (producto: Product) => {
+    removeProduct(producto);
+  };
+  useEffect(() => {
+    setBasketProducts(basket);
+  }, [basket]);
+  const handleBuy = () => {
+    let newQuantity = productActive.available_quantity - 1;
+    productActive.available_quantity = newQuantity;
+    setProductActive(productActive);
+    buyIT();
+  };
   return (
     <>
+      <Modal
+        closeOnOverlayClick={false}
+        isOpen={isOpen}
+        onClose={onClose}
+        size={basketvalue !== 0 ? "full" : "sm"}
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent backgroundColor="#e6e6e6">
+          <ModalCloseButton />
+          <ModalHeader>{""}</ModalHeader>
+          <ModalBody pb={6} mt="15px">
+            {basketvalue === 0 ? (
+              <p>Todavia no agregaste ningun producto al carrito</p>
+            ) : (
+              <Stack
+                p="40px"
+                h="100%"
+                minHeight="400px"
+                backgroundColor="white"
+              >
+                <ModalHeader borderBottom="1px solid #e6e6e6" fontSize="17px">
+                  Carrito({basket.length})
+                </ModalHeader>
+                {basketproducts.map((producto: Product, index: number) => (
+                  <Stack
+                    p="47px 0 48px"
+                    borderBottom="1px solid #e6e6e6"
+                    direction="row"
+                    alignItems="center"
+                    spacing={2}
+                    key={index}
+                  >
+                    <Image
+                      w="50px"
+                      h="50px"
+                      borderRadius="100%"
+                      src={producto.thumbnail}
+                      alt={producto.title}
+                    />
+                    <Stack
+                      direction="row"
+                      justifyContent="space-between"
+                      w="90%"
+                      p="10px"
+                    >
+                      <Stack>
+                        <Text fontSize="22px" fontWeight="bold">
+                          {producto.title}
+                        </Text>
+                        <Text
+                          color="#3483fa"
+                          cursor="pointer"
+                          onClick={() => handdleRemove(producto)}
+                        >
+                          Eliminar
+                        </Text>
+                      </Stack>
+                      <Text fontSize="20px" fontWeight="bold">
+                        {priceFormater.format(producto.price)}
+                      </Text>
+                    </Stack>
+                  </Stack>
+                ))}
+              </Stack>
+            )}
+          </ModalBody>
+          {basketvalue !== 0 ? (
+            <ModalFooter
+              bg="white"
+              boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px;"
+            >
+              <Text m="20px">Total : {priceFormater?.format(basketvalue)}</Text>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Continuar compra
+              </Button>
+            </ModalFooter>
+          ) : null}
+        </ModalContent>
+      </Modal>
       <Stack
         backgroundColor="white"
         margin="0px!important"
@@ -138,12 +251,20 @@ const NavBar = () => {
                   fontWeight="100"
                   fontSize={25}
                 />
-                <Icon
-                  display="flex"
-                  as={HiOutlineShoppingCart}
-                  fontWeight="100"
-                  fontSize={25}
-                />
+                <Button
+                  cursor="pointer"
+                  zIndex="99"
+                  bg="transparent"
+                  outline="none"
+                  onClick={() => handleModal()}
+                >
+                  <Icon
+                    display="flex"
+                    as={HiOutlineShoppingCart}
+                    fontWeight="100"
+                    fontSize={25}
+                  />
+                </Button>
               </Stack>
             </Stack>
             <Stack
@@ -210,6 +331,7 @@ const NavBar = () => {
                     fontSize={25}
                     as={HiOutlineShoppingCart}
                     fontWeight="100"
+                    onClick={() => handleModal()}
                   />
                   {basket.length === 0 ? null : <span>{basket.length}</span>}
                 </BasketWraper>
@@ -218,19 +340,17 @@ const NavBar = () => {
           </Stack>
         </Container>
       </Box>
-      {basket.length != 0 ? (
+      {basket.length !== 0 ? (
         <Stack
           maxWidth="container.xl"
           paddingX={0}
-          margin="0px auto!important"
+          margin="15px auto!important"
           justifySelf="center"
-          w="80%"
         >
           <Stack
-            m="10px auto!important"
-            direction="row"
             justifyContent="space-between"
             alignItems="center"
+            direction={{ base: "column", md: "row" }}
           >
             <Stack
               direction="row"
@@ -239,7 +359,7 @@ const NavBar = () => {
               m="10px"
             >
               <Image
-                src={basket[basket.length - 1].thumbnail}
+                src={basket[basket.length - 1]?.thumbnail}
                 w="64px "
                 h="64px"
                 borderRadius="100%"
@@ -253,14 +373,16 @@ const NavBar = () => {
                 >
                   Agregaste a tu carrito
                 </Text>
-                <Text>{basket[basket.length - 1].title}</Text>
+                <Text>{basket[basket.length - 1]?.title}</Text>
               </Stack>
             </Stack>
 
             <Stack direction="row">
               <Stack direction="row" justifyContent="space-evenly">
                 <Text>{basket.length} productos en tu carrito:</Text>
-                <Text>$precio</Text>
+                {priceFormater != undefined && (
+                  <Text>{priceFormater.format(basketvalue)}</Text>
+                )}
               </Stack>
               <Image
                 src={basket[basket.length - 1].thumbnail}
@@ -283,9 +405,11 @@ const NavBar = () => {
                 _hover={{
                   backgroundColor: "#2968c8",
                 }}
+                onClick={() => handleModal()}
               >
                 Ver Carrito
               </Button>
+
               <Button
                 backgroundColor="rgba(65,137,230,.2)"
                 color="#3483fa"
@@ -297,6 +421,8 @@ const NavBar = () => {
                 _hover={{
                   backgroundColor: "rgba(65,137,230,.2)",
                 }}
+                onClick={() => handleBuy()}
+                disabled={productActive?.available_quantity <= 0}
               >
                 Comprar carrito
               </Button>

@@ -8,7 +8,7 @@ const Description = () => {
   return (
     <Table w="100%">
       <Tbody>
-        {productActive.attributes.map((atribute: any, index: number) => {
+        {productActive?.attributes?.map((atribute: any, index: number) => {
           if (
             atribute.id === "BRAND" ||
             atribute.id === "MODEL" ||

@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Stack, Image } from "@chakra-ui/react";
-import { Product, ProductPicture } from "../product/types";
-interface IProductImage {
-  id: string;
-  max_size: string;
-  quality: string;
-  secure_url: string;
-  size: string;
-  url: string;
-}
-const ProductImageCarrousel = (props: { product: Product }) => {
-  const [image, setImage] = useState<IProductImage | ProductPicture>();
-  const [border, setBorder] = useState<boolean>(false);
+import { ProductPicture } from "../product/types";
+import ProductContext from "../context/ProductContext";
 
+const ProductImageCarrousel = () => {
+  const [image, setImage] = useState<ProductPicture>();
+  const [border, setBorder] = useState<boolean>(false);
+  const productContext = useContext(ProductContext);
+  const { productActive } = productContext;
   if (image === undefined) {
-    setImage(props?.product?.pictures[0]);
+    setImage(productActive?.pictures[0]);
   }
 
   const handleHover = (picture: any) => {
@@ -35,7 +30,7 @@ const ProductImageCarrousel = (props: { product: Product }) => {
         m={2}
         justifyContent={{ base: "center", md: "normal" }}
       >
-        {props.product.pictures.map((picture) => (
+        {productActive?.pictures?.map((picture) => (
           <Stack
             w="48px"
             h="48px"
