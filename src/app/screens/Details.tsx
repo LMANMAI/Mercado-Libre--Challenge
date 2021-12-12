@@ -15,7 +15,6 @@ import {
   Description,
   QA,
 } from "../../components";
-import { useLocation } from "react-router-dom";
 import ProductContext from "../../context/ProductContext";
 
 const DetailsScreen: React.FC = () => {
@@ -28,12 +27,14 @@ const DetailsScreen: React.FC = () => {
       alignSelf="center"
       minHeight="50%"
       height="fit-content"
+      maxWidth="container.xl"
     >
       <Stack
         margin={4}
         direction={{ base: "column", md: "row" }}
         fontSize={13}
         alignItems={{ base: "center" }}
+        w="80%"
       >
         <Text fontWeight="bold">También puede interesarte microfono </Text>
         <Text>

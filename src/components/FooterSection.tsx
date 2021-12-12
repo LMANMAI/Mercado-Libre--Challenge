@@ -45,6 +45,8 @@ const FooterSection = () => {
               justifyContent="space-between"
               spacing={5}
               p="0 110px"
+              maxWidth="container.xl"
+              margin="0px auto"
             >
               <Stack my="46px!important">
                 <Text fontWeight="bold">Acerca de</Text>
@@ -104,7 +106,7 @@ const FooterSection = () => {
         backgroundColor="#fff"
         marginTop="0px!important"
       >
-        <Stack width="80%" alignSelf="center">
+        <Stack width="80%" alignSelf="center" maxWidth="container.xl">
           <Stack spacing={1} direction="column-reverse">
             <Text fontSize="14px" color="#999">
               Copyright © 1999-2021
